@@ -1,0 +1,11 @@
+state: enabled
+email: kon@in.gr
+fullname: Kostas
+title: Administrator
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$oeltykIQ9nWnbVwSpzYz3O3voZGuXV6DrqVJ.SWktwOxJ.3tUycuu

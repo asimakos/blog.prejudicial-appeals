@@ -1,0 +1,70 @@
+
+{% extends 'partials/base.html.twig' %}
+
+{% set collection=page.collection() %}
+
+{% block content %}
+
+	   {% for page in collection %}
+
+	      <h4>ΓΑΚ {{page.title}}</h4>
+
+	      <div class="row">
+
+		      <div class="col-sm-12">
+
+		        {% for p in page.children %}
+
+		      	  {% if  p.title|length %}
+			      	 
+		      		{% set current_button = p.title|contains('Αναστολή') ? 'btn-danger' : 'btn-primary' %}
+		      		{% set icon_button = p.title|contains('Αναστολή') ? 'fa-gavel' : 'fa-balance-scale' %}
+
+			      	<button type="button" class="btn {{ current_button }}" data-toggle="modal" data-target="#myModal{{p.parent.title}}{{loop.index}}">
+	                   <i class="fas {{ icon_button }}"></i>  {{ p.title }}
+	                </button>
+
+	                <div class="modal" id="myModal{{p.parent.title}}{{loop.index}}">
+					    <div class="modal-dialog modal-dialog-scrollable">
+					      <div class="modal-content">
+					      
+					        
+					        <div class="modal-header">
+					          <h1 class="modal-title">{{ p.title }}</h1>
+					          <button type="button" class="close" data-dismiss="modal">×</button>
+					        </div>
+					        
+					        
+					        <div class="modal-body">
+					         <p> {{ p.content }}</p>
+					        </div>
+					        
+					        
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					        </div>
+					        
+					      </div>
+
+			            </div>
+
+			        </div>
+
+		            {% endif %}
+
+	            {% endfor %}
+
+	        </div>
+
+        </div>  
+
+	   {% endfor %}	
+
+		   {% if config.plugins.pagination.enabled and collection.params.pagination %}
+
+			   {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+    
+	       {% endif %} 
+  
+
+{% endblock %}

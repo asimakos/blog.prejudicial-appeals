@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  
+   <a class="navbar-brand" href="{{base_url == '' ? '/': base_url}}">{{config.site.title}}</a>
+    
+    <ul class="navbar-nav">
+      {% for page in pages.children %}
+          {% if page.visible %}
+            {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
+            <li class="nav-item">
+              <a class = "nav-link {{ current_page }}" href = "{{ page.url }}">{{ page.title }}</a>
+            </li>
+          {% endif %}
+      {% endfor %}
+    </ul>
+  
+</nav>
